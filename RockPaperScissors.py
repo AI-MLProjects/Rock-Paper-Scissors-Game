@@ -241,13 +241,6 @@ model.compile(
     metrics=['accuracy']
 )
 
-# ----- Training the model -----
-steps_per_epoch = NUM_TRAIN_EXAMPLES // BATCH_SIZE
-validation_steps = NUM_TEST_EXAMPLES // BATCH_SIZE
-
-print('steps_per_epoch:', steps_per_epoch)
-print('validation_steps:', validation_steps)
-
 #Defining Callbacks
 
 DESIRED_ACCURACY = 0.90
@@ -260,6 +253,14 @@ class myCallback(tf.keras.callbacks.Callback):
 
 callbacks = myCallback()
 
+
+# ----- Training the model -----
+steps_per_epoch = NUM_TRAIN_EXAMPLES // BATCH_SIZE
+validation_steps = NUM_TEST_EXAMPLES // BATCH_SIZE
+
+print('steps_per_epoch:', steps_per_epoch)
+print('validation_steps:', validation_steps)
+
 training_history = model.fit(
     x=dataset_train_augmented_shuffled.repeat(),
     validation_data=dataset_test_shuffled.repeat(),
@@ -269,4 +270,3 @@ training_history = model.fit(
     verbose=1,
     callbacks=[callbacks]
 )
-
