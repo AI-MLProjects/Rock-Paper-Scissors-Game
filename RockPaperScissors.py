@@ -270,3 +270,5 @@ training_history = model.fit(
     verbose=1,
     callbacks=[callbacks]
 )
+
+model.save("rock-paper-scissors-trained.h5")
