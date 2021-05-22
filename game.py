@@ -21,19 +21,19 @@ def calculate_winner(move1, move2):
 
     if move1 == "rock":
         if move2 == "scissors":
-            return "User"
+            return "Naman"
         if move2 == "paper":
             return "Computer"
 
     if move1 == "paper":
         if move2 == "rock":
-            return "User"
+            return "Naman"
         if move2 == "scissors":
             return "Computer"
 
     if move1 == "scissors":
         if move2 == "paper":
-            return "User"
+            return "Naman"
         if move2 == "rock":
             return "Computer"
 
@@ -46,16 +46,17 @@ prev_move = None
 
 while True:
     ret, frame = cap.read()
+    cv2.resize(frame, (1280, 720))
     if not ret:
         continue
-
-    # rectangle for user to play
-    cv2.rectangle(frame, (100, 100), (500, 500), (255, 255, 255), 2)
     # rectangle for computer to play
-    cv2.rectangle(frame, (800, 100), (1200, 500), (255, 255, 255), 2)
+    cv2.rectangle(frame, (400, 50), (600, 250), (255, 255, 255), 2)
+    # rectangle for user to play
+    cv2.rectangle(frame, (50, 50), (350, 350), (255, 255, 255), 2)
+
 
     # extract the region of image within the user rectangle
-    roi = frame[100:500, 100:500]
+    roi = frame[50:350, 50:350]
     img = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
     img = cv2.resize(img, (155, 155))
 
@@ -77,18 +78,18 @@ while True:
 
     # display the information
     font = cv2.FONT_HERSHEY_SIMPLEX
-    cv2.putText(frame, "Your Move: " + user_move_name,
-                (50, 50), font, 1.2, (255, 255, 255), 2, cv2.LINE_AA)
+    cv2.putText(frame, "Naman's Move: " + user_move_name,
+                (25, 25), font, 0.6, (255, 255, 255), 2, cv2.LINE_AA)
     cv2.putText(frame, "Computer's Move: " + computer_move_name,
-                (750, 50), font, 1.2, (255, 255, 255), 2, cv2.LINE_AA)
+                (325, 25), font, 0.6, (255, 255, 255), 2, cv2.LINE_AA)
     cv2.putText(frame, "Winner: " + winner,
-                (400, 600), font, 2, (0, 0, 255), 4, cv2.LINE_AA)
+                (150, 410), font, 1.5, (0, 0, 255), 4, cv2.LINE_AA)
 
     if computer_move_name != "none":
         icon = cv2.imread(
             "images/{}.png".format(computer_move_name))
-        icon = cv2.resize(icon, (380, 480))
-        #frame[100:500, 800:1200] = icon
+        icon = cv2.resize(icon, (200, 200))
+        frame[50:250, 400:600] = icon
 
     cv2.imshow("Rock Paper Scissors", frame)
 
