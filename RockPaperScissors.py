@@ -271,4 +271,35 @@ training_history = model.fit(
     callbacks=[callbacks]
 )
 
+def render_training_history(training_history):
+    loss = training_history.history['loss']
+    val_loss = training_history.history['val_loss']
+
+    accuracy = training_history.history['accuracy']
+    val_accuracy = training_history.history['val_accuracy']
+
+    plt.figure(figsize=(14, 4))
+
+    plt.subplot(1, 2, 1)
+    plt.title('Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.plot(loss, label='Training set')
+    plt.plot(val_loss, label='Test set', linestyle='--')
+    plt.legend()
+    plt.grid(linestyle='--', linewidth=1, alpha=0.5)
+
+    plt.subplot(1, 2, 2)
+    plt.title('Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.plot(accuracy, label='Training set')
+    plt.plot(val_accuracy, label='Test set', linestyle='--')
+    plt.legend()
+    plt.grid(linestyle='--', linewidth=1, alpha=0.5)
+
+    plt.show()
+
+render_training_history(training_history)
+
 model.save("rock-paper-scissors-trained.h5")
