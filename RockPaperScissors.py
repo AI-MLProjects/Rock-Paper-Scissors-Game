@@ -2,6 +2,7 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflowjs as tfjs
 
 DATASET_NAME = 'rock_paper_scissors'
 
@@ -243,10 +244,10 @@ model.compile(
 
 #Defining Callbacks
 
-DESIRED_ACCURACY = 0.90
+DESIRED_ACCURACY = 0.92
 class myCallback(tf.keras.callbacks.Callback):
     def on_epoch_end(self, epoch, logs={}):
-        if(logs.get('accuracy') is not None and logs.get('accuracy') >= DESIRED_ACCURACY):
+        if(logs.get('val_accuracy') is not None and logs.get('val_accuracy') >= DESIRED_ACCURACY):
             print("\nReached 90% accuracy so cancelling training!!")
             self.model.stop_training = True
 
@@ -301,5 +302,7 @@ def render_training_history(training_history):
     plt.show()
 
 render_training_history(training_history)
+
+tfjs.converters.save_keras_model(model, "rock-paper-scissors-js")
 
 model.save("rock-paper-scissors-trained.h5")
