@@ -86,7 +86,7 @@ while True:
     #displaying the computer view
     if computer_move_name != "none":
         icon = cv2.imread(
-            "images/{}.png".format(computer_move_name))
+            "computerImages/{}.png".format(computer_move_name))
         icon = cv2.resize(icon, (200, 200))
         frame[50:250, 400:600] = icon
 
