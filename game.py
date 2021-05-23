@@ -7,7 +7,6 @@ REV_CLASS_MAP = {
     0: "rock",
     1: "paper",
     2: "scissors",
-    3: "none"
 }
 
 
@@ -71,9 +70,6 @@ while True:
         if user_move_name != "none":
             computer_move_name = choice(['rock', 'paper', 'scissors'])
             winner = calculate_winner(user_move_name, computer_move_name)
-        else:
-            computer_move_name = "none"
-            winner = "Waiting..."
     prev_move = user_move_name
 
     # display the information
