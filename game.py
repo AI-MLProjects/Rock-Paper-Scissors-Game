@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from random import choice
 
-REV_CLASS_MAP = {
+CLASS_MAP = {
     0: "rock",
     1: "paper",
     2: "scissors",
@@ -11,7 +11,7 @@ REV_CLASS_MAP = {
 
 
 def mapper(val):
-    return REV_CLASS_MAP[val]
+    return CLASS_MAP[val]
 
 
 def calculate_winner(move1, move2):
