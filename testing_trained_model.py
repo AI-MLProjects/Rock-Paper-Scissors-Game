@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 # Path where the sample image is stored
-FILE_PATH = "testimg.png"
+FILE_PATH = "test_img.png"
 
 # Path where the trained model is stored
 MODEL_PATH = "rock-paper-scissors-trained.h5"
