@@ -1,10 +1,10 @@
-from keras.models import load_model
 import cv2
 import numpy as np
 from random import choice
+from keras.models import load_model
 
-# Path where the trained model is stored
-MODEL_PATH = "rock-paper-scissors-trained.h5"
+# Trained Model
+TRAINED_MODEL = "rock-paper-scissors-trained.h5"
 
 # Defining class map for each label
 CLASS_MAP = {
@@ -12,10 +12,13 @@ CLASS_MAP = {
     1: "paper",
     2: "scissors",
 }
+
+
 def mapper(val):
     return CLASS_MAP[val]
 
-# Function to calculate winner
+
+# Returns the correct winner based on the inputs received.
 def calculate_winner(move1, move2):
     if move1 == move2:
         return "Tie"
@@ -38,14 +41,15 @@ def calculate_winner(move1, move2):
         if move2 == "rock":
             return "Computer"
 
-# Loading the previously trained model
-model = load_model(MODEL_PATH)
+
+# Loading the trained model
+model = load_model(TRAINED_MODEL)
 
 # Starting the video capture
 cap = cv2.VideoCapture(0)
 prev_move = None
 
-#Drawing 2 Rectangle boxes in the camera frame
+# Drawing 2 Rectangle boxes in the camera frame
 while True:
     ret, frame = cap.read()
     if not ret:
@@ -55,8 +59,7 @@ while True:
     # rectangle for user to play
     cv2.rectangle(frame, (50, 50), (350, 350), (255, 255, 255), 2)
 
-
-    # specifing to only detect the hand inside the rectangle
+    # specifying to only detect the hand inside the rectangle
     roi = frame[50:350, 50:350]
     img = cv2.cvtColor(roi, cv2.COLOR_BGR2RGB)
     img = cv2.resize(img, (155, 155))
@@ -83,7 +86,7 @@ while True:
     cv2.putText(frame, "Winner: " + winner,
                 (150, 410), font, 1.5, (0, 0, 255), 4, cv2.LINE_AA)
 
-    #displaying the computer view
+    # displaying the computer's move
     if computer_move_name != "none":
         icon = cv2.imread(
             "computerImages/{}.png".format(computer_move_name))
@@ -92,9 +95,9 @@ while True:
 
     cv2.imshow("Rock Paper Scissors", frame)
 
-    #Killing the game if the "Q" key is pressed
-    killKey = cv2.waitKey(10)
-    if killKey == ord('q'):
+    # Killing the game if the "Q" key is pressed
+    stopKey = cv2.waitKey(10)
+    if stopKey == ord('q'):
         break
 
 cap.release()
