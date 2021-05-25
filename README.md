@@ -1,4 +1,6 @@
 # Rock Paper Scissors 
+![visitors](https://visitor-badge.glitch.me/badge?page_id=namannarula.rockpaperscissors)
+
 Creating an interactive game using the Rock Paper Scissors dataset and Computer Vision. 
 
 
